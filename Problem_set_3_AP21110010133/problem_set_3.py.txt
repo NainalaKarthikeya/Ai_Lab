@@ -1,0 +1,31 @@
+def main():
+    num_levels = int(input("Enter the height of the binary tree: "))
+
+    tree_levels = [[] for _ in range(num_levels)]
+    left_subtree_levels = [[] for _ in range(num_levels - 1)]
+    right_subtree_levels = [[] for _ in range(num_levels - 1)]
+    is_balanced = True
+
+    for level in range(num_levels):
+        num_nodes = pow(2, level)
+        for node_idx in range(num_nodes):
+            node_val = int(input("Enter the data for node at level {} and position {} : ".format(level + 1, node_idx + 1)))
+            tree_levels[level].append(node_val)
+            if level > 0:
+                if node_idx < num_nodes // 2:
+                    left_subtree_levels[level - 1].append(node_val)
+                else:
+                    right_subtree_levels[level - 1].append(node_val)
+        if left_subtree_levels[level - 1] != right_subtree_levels[level - 1]:
+            is_balanced = False
+
+    print("Binary Tree:")
+    print(tree_levels)
+    print("Left Subtree:")
+    print(left_subtree_levels)
+    print("Right Subtree:")
+    print(right_subtree_levels)
+    print("Is the binary tree balanced?", is_balanced)
+
+if __name__ == "__main__":
+    main()
